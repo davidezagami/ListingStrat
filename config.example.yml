@@ -1,0 +1,88 @@
+---
+EMAIL_ADDRESS: ''
+EMAIL_PASSWORD: ''
+TRADE_OPTIONS:
+
+  FIRST_WARNING_TIME_MINUTES: 60
+  SECOND_WARNING_TIME_MINUTES: 10
+  THIRD_WARNING_TIME_SECONDS: 120
+  CHECK_LISTING_START_TIME: 1.5
+  # How often to check for new tickers and run the script in seconds
+  FREQUENCY_SECONDS: 0.01
+  SELL_RETRY_SECONDS: 0.25
+  TEST: False
+
+  #  Brokers to run.  Make sure to set API keys in auth.yml
+  BROKERS:
+    BINANCE:
+      ENABLED: True
+      # quantify of QUOTE_TICKER (below) to be bought
+      QUANTITY: 31
+      # For example, BTCUSDT will be bought with pairing 'USDT'
+      QUOTE_TICKER: 'USDT'
+      # auto limit sell
+      LIMIT_SELL_PERCENT: 26
+      LIMIT_SELL_SECONDS: 6
+      MARKET_SELL_SECONDS: 10
+
+      # Most users will not have a Binance subaccount
+      SUBACCOUNT: None
+      # Auto-sell if price goes X% of original purchase price
+      STOP_LOSS_PERCENT: 9
+      # Auto-sell if price goes above Y% of original purchase price
+      # TAKE_PROFIT_PERCENT is **IGNORED** if ENABLE_TRAILING_STOP_LOSS is True
+      TAKE_PROFIT_PERCENT: 33
+      # TAKE_PROFIT_PERCENT is **IGNORED** if ENABLE_TRAILING_STOP_LOSS is True
+      ENABLE_TRAILING_STOP_LOSS: True
+      #  Activate trailing stop loss once price is Z% above original purchase price
+      TRAILING_STOP_LOSS_ACTIVATION: 10
+      # Auto-sell if price goes X% below maximum price after activation
+      TRAILING_STOP_LOSS_PERCENT: 8
+
+    FTX:
+      ENABLED: False 
+      QUANTITY: 30
+      SUBACCOUNT: None
+      QUOTE_TICKER: 'USDT'
+      STOP_LOSS_PERCENT: 20
+      TAKE_PROFIT_PERCENT: 30
+      ENABLE_TRAILING_STOP_LOSS: True
+      TRAILING_STOP_LOSS_ACTIVATION: 35
+      TRAILING_STOP_LOSS_PERCENT: 10
+
+PROGRAM_OPTIONS:
+  # log level for output.  I recommend  either INFO or DEBUG
+  LOG_LEVEL: DEBUG
+  # how often, in minutes, to check scraping and new listings
+  LOG_INFO_UPDATE_INTERVAL: 13
+  #  if true, any time a new LIVE order or sale occurs the resulting object will be sent to and logged to pipedream.com account.
+  #  I'll use this info to build better test cases and it will help me catch edge cases and bugs.
+  SHARE_DATA: False
+NOTIFICATION_OPTIONS:
+  DISCORD:
+    ENABLED: False
+    NAME: 'DISCORD'
+    SETTINGS:
+      SEND_MESSAGE: True
+      SEND_ERROR: True
+      SEND_WARNING: False
+      SEND_INFO: False
+      SEND_DEBUG: False
+      SEND_ENTRY: True
+      SEND_CLOSE: True
+    AUTH:
+      ENDPOINT: 'https://discord.com/api/webhooks/<...> -> Read readme for more info'
+  TELEGRAM:
+    ENABLED: True
+    NAME: 'TELEGRAM'
+    SETTINGS:
+      SEND_MESSAGE: True
+      SEND_ERROR: True
+      SEND_WARNING: True
+      SEND_INFO: True
+      SEND_DEBUG: False
+      SEND_ENTRY: True
+      SEND_CLOSE: True
+    AUTH:
+      ENDPOINT: '2110759539:AAHTuc1-hjBQIMxopZrqqYb-nPxIUXjmDbg'
+      CHAT_ID: '-769973814'
